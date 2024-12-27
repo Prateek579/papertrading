@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
+import { MyContextProvider } from "../context/MyContext";
+import Alert from "../components/alert/page";
+import Spinner from "@/components/spinnner/page";
+// import HexagonalParticles from "@/component/particle";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,9 +19,38 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
+      </head>
+      <body className={inter.className}>
+        <MyContextProvider>
+          <>
+            <Alert />
+            <Spinner />
+            {/* <nav className="flex flex-row items-center justify-between px-16 py-4 bg-slate-800">
+              <div className="nav-left">
+                logo
+              </div>
+              <div className="nav-right">
+                <ul className="flex flex-row items-center justify-between">
+                  <li className="mx-3"><Link href="/prortfolio/charting"> Charts</Link></li>
+                  <li className="mx-3"><Link href="/prortfolio/position">Position</Link></li>
+                  <li className="ml-3"><Link href="/prortfolio/performance">History</Link></li>
+                  <li className="ml-3"><Link href="/prortfolio/Order">Order</Link></li>
+                  <li className="ml-3"><Link href="/home">User</Link></li>
+                </ul>
+              </div>
+            </nav> */}
+            {children}
+          </>
+        </MyContextProvider>
+      </body>
     </html>
   );
 }
